@@ -40,11 +40,13 @@ public class BankAccount {
 
 
     public static boolean isEmailValid(String email){
-        if (email.indexOf('@') == -1){
+        if(email == null || email.length() == 0){
             return false;
         }
-        else {
-            return true;
-        }
+
+        String pattern = "^[A-Za-z0-9][A-Za-z0-9-]*@[A-Za-z]+\\.[A-Za-z]+$";
+        return email.matches(pattern);
+    
+
     }
 }
