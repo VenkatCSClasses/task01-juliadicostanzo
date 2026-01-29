@@ -28,14 +28,19 @@ class BankAccountTest {
         assertTrue(BankAccount.isEmailValid( "a@b.com"));   // valid email address
         assertTrue(BankAccount.isEmailValid( "a@b.org"));   // valid email address
         assertTrue(BankAccount.isEmailValid( "a-b@c.com"));   // valid email address
+        assertTrue(BankAccount.isEmailValid("2a@gmail.com")); // valid email address (starting with number)
         assertFalse(BankAccount.isEmailValid(""));         // empty string
         assertFalse(BankAccount.isEmailValid("a@.com"));   // missing second-level domain name
         assertFalse(BankAccount.isEmailValid("a@b"));      // missing top-level domain name
         assertFalse(BankAccount.isEmailValid("@b.com"));   // missing local part (username)
         assertFalse(BankAccount.isEmailValid("ab.com"));   // missing @ symbol
         assertFalse(BankAccount.isEmailValid("a@b..com")); // double dot in domain name
+        assertFalse(BankAccount.isEmailValid("a@@b.com")); // double @ symbol
         assertFalse(BankAccount.isEmailValid("-@b.com"));  // local part starts with invalid character
-        assertFalse(BankAccount.isEmailValid("a@b#.com")); // invalid character in domain name
+        assertFalse(BankAccount.isEmailValid("a@-gmail.com")); // domain name starts with invalid character
+        assertFalse(BankAccount.isEmailValid("a@gmail#.com")); // invalid character in domain name
+        assertFalse(BankAccount.isEmailValid(".a@gmail.com")); // local part starts with invalid character
+        assertFalse(BankAccount.isEmailValid("a2@#gmail.com")); // invalid character in domain name
         
 
 
