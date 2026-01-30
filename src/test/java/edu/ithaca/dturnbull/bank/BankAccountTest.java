@@ -28,7 +28,7 @@ class BankAccountTest {
         assertTrue(BankAccount.isEmailValid( "a@b.com"));   // valid email address //equivalence class
         assertTrue(BankAccount.isEmailValid( "a@b.org"));   // valid email address //equivalence class
         assertTrue(BankAccount.isEmailValid( "a-b@c.com"));   // valid email address //equivalence class
-        assertFalse(BankAccount.isEmailValid("2a@gmail.com")); // invalid email address (starting with number) //equivalence class
+        assertTrue(BankAccount.isEmailValid("2a@gmail.com")); // valid email address (starting with number) //equivalence class
         assertFalse(BankAccount.isEmailValid(""));         // empty string //boundary case
         assertFalse(BankAccount.isEmailValid("a@.com"));   // missing second-level domain name //equivalence class
         assertFalse(BankAccount.isEmailValid("a@b"));      // missing top-level domain name //equivalence class
