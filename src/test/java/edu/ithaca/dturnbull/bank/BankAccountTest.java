@@ -25,22 +25,22 @@ class BankAccountTest {
     @Test
     void isEmailValidTest(){
         //tests are very comprehensive for this method
-        assertTrue(BankAccount.isEmailValid( "a@b.com"));   // valid email address //equivalence class
-        assertTrue(BankAccount.isEmailValid( "a@b.org"));   // valid email address //equivalence class
-        assertTrue(BankAccount.isEmailValid( "a-b@c.com"));   // valid email address //equivalence class
-        assertFalse(BankAccount.isEmailValid("2a@gmail.com")); // invalid email address (starting with number) //equivalence class
         assertFalse(BankAccount.isEmailValid(""));         // empty string //boundary case
-        assertFalse(BankAccount.isEmailValid("a@.com"));   // missing second-level domain name //equivalence class
-        assertFalse(BankAccount.isEmailValid("a@b"));      // missing top-level domain name //equivalence class
-        assertFalse(BankAccount.isEmailValid("@b.com"));   // missing local part (username) //equivalence class
-        assertFalse(BankAccount.isEmailValid("ab.com"));   // missing @ symbol //equivalence class
-        assertFalse(BankAccount.isEmailValid("a@b..com")); // double dot in domain name//equivalence class
-        assertFalse(BankAccount.isEmailValid("a@@b.com")); // double @ symbol //equivalence class
-        assertFalse(BankAccount.isEmailValid("-@b.com"));  // local part starts with invalid character //equivalence class
-        assertFalse(BankAccount.isEmailValid("a@-gmail.com")); // domain name starts with invalid character//equivalence class
-        assertFalse(BankAccount.isEmailValid("a@gmail#.com")); // invalid character in domain name //equivalence class
-        assertFalse(BankAccount.isEmailValid(".a@gmail.com")); // local part starts with invalid character //equivalence class
-        assertFalse(BankAccount.isEmailValid("a2@#gmail.com")); // invalid character in domain name //equivalence class
+        assertFalse(BankAccount.isEmailValid(null));         // null //boundary case
+        assertTrue(BankAccount.isEmailValid( "user@gmail.com"));   // valid email address //equivalence class
+        assertTrue(BankAccount.isEmailValid( "user-a@gmail.com"));   // valid email address //equivalence class
+        assertFalse(BankAccount.isEmailValid("2user@gmail.com")); // Valid email address (starting with number) //equivalence class
+        assertFalse(BankAccount.isEmailValid("-user@gmail.com"));  // local part starts with invalid character //equivalence class
+        assertFalse(BankAccount.isEmailValid(".user@gmail.com")); // local part starts with invalid character //equivalence class
+        assertFalse(BankAccount.isEmailValid("@gmail.com"));   // missing local part (username) //equivalence class
+        assertFalse(BankAccount.isEmailValid("user@@gmail.com")); // double @ symbol //equivalence class
+        assertFalse(BankAccount.isEmailValid("usergmail.com"));   // missing @ symbol //equivalence class
+        assertFalse(BankAccount.isEmailValid("user@.com"));   // missing second-level domain name //equivalence class
+        assertFalse(BankAccount.isEmailValid("user@gmail"));      // missing top-level domain name //equivalence class
+        assertFalse(BankAccount.isEmailValid("user@-gmail.com")); // domain name starts with invalid character//equivalence class
+        assertFalse(BankAccount.isEmailValid("user2@gm#ail.com")); // invalid character in domain name //equivalence class
+        assertFalse(BankAccount.isEmailValid("user@gmail..com")); // double dot in domain name//equivalence class
+        assertFalse(BankAccount.isEmailValid("user@gmail#.com")); // invalid character in domain name //equivalence class
         
 
 
