@@ -44,7 +44,7 @@ public class BankAccount {
             return false;
         }
 
-        String pattern = "^[A-Za-z0-9][A-Za-z0-9-]*@[A-Za-z]+\\.[A-Za-z]+$";
+        String pattern = "^[A-Za-z][A-Za-z0-9-]*@[A-Za-z]+\\.[A-Za-z]+$";
         return email.matches(pattern);
     
 
