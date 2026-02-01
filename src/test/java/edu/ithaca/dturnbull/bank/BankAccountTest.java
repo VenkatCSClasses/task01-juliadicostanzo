@@ -18,8 +18,11 @@ class BankAccountTest {
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
         bankAccount.withdraw(100);
 
-        assertEquals(100, bankAccount.getBalance(), 0.001);
-        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300));
+        assertEquals(100, bankAccount.getBalance(), 0.001); //checks the balance is correct after withdraw
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300)); //checks exception is thrown when amount is larger than balance
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(-300)); //checks exception is thrown when amount is negative
+        bankAccount.withdraw(100);
+        assertEquals(100, bankAccount.getBalance(), 0.001); //checks the balance can be reduced to zero
     }
 
     @Test
