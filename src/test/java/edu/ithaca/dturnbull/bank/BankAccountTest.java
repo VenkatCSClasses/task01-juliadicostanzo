@@ -8,9 +8,17 @@ class BankAccountTest {
 
     @Test
     void getBalanceTest() {
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
-
+        BankAccount bankAccount = new BankAccount("a@b.com", 200); //tests normal starting balance boundary case
         assertEquals(200, bankAccount.getBalance(), 0.001);
+        
+        BankAccount bankAccount2 = new BankAccount("a@b.com", 0); //tests zero starting balance boundary case
+        assertEquals(0, bankAccount2.getBalance(), 0.001);
+        
+        BankAccount bankAccount3 = new BankAccount("a@b.com", -200); //tests negative starting balance boundary case
+        assertThrows(InsufficientFundsException.class, () -> bankAccount3.getBalance());
+
+        BankAccount bankAccount4 = new BankAccount("a@b.com", 1000000000); //tests large starting balance boundary case
+        assertEquals(1000000000, bankAccount4.getBalance(), 0.001);
     }
 
     @Test
@@ -18,11 +26,11 @@ class BankAccountTest {
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
         bankAccount.withdraw(100);
 
-        assertEquals(100, bankAccount.getBalance(), 0.001); //checks the balance is correct after withdraw
+        assertEquals(100, bankAccount.getBalance(), 0.001); //checks the balance is correct after withdraw 
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300)); //checks exception is thrown when amount is larger than balance
-        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(-300)); //checks exception is thrown when amount is negative
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(-300)); //checks exception is thrown when amount is negative 
         bankAccount.withdraw(100);
-        assertEquals(100, bankAccount.getBalance(), 0.001); //checks the balance can be reduced to zero
+        assertEquals(0, bankAccount.getBalance(), 0.001); //checks the balance can be reduced to zero boundary case
     }
 
     @Test
