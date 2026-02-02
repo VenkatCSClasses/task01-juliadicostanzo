@@ -42,7 +42,9 @@ public class BankAccount {
         }
     }
 
-
+    /**
+     * @return true if email is valid, false otherwise
+     */
     public static boolean isEmailValid(String email){
         if(email == null || email.length() == 0){
             return false;
@@ -50,7 +52,12 @@ public class BankAccount {
 
         String pattern = "^[A-Za-z0-9][A-Za-z0-9-]*@[A-Za-z]+\\.[A-Za-z]+$";
         return email.matches(pattern);
-    
+    }
 
+    /**
+     * @return true if amount is valid (positive, two decimal points or less), false otherwise
+     */
+    public static boolean isAmountValid(double amount){
+        return false;
     }
 }

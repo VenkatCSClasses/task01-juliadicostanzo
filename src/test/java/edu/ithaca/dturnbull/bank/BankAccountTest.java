@@ -53,11 +53,6 @@ class BankAccountTest {
         assertFalse(BankAccount.isEmailValid("user2@gm#ail.com")); // invalid character in domain name //equivalence class
         assertFalse(BankAccount.isEmailValid("user@gmail..com")); // double dot in domain name//equivalence class
         assertFalse(BankAccount.isEmailValid("user@gmail#.com")); // invalid character in domain name //equivalence class
-        
-
-
-
-        
     }
 
     @Test
@@ -68,6 +63,15 @@ class BankAccountTest {
         assertEquals(200, bankAccount.getBalance(), 0.001);
         //check for exception thrown correctly
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 100));
+    }
+
+    @Test 
+    void isAmountValidTest(){
+        assertTrue(BankAccount.isAmountValid(0)); //boundary case
+        assertTrue(BankAccount.isAmountValid(100)); //valid equivalence class
+        assertTrue(BankAccount.isAmountValid(100.50)); //valid equivalence class
+        assertFalse(BankAccount.isAmountValid(-100)); //invalid equivalence class
+        assertFalse(BankAccount.isAmountValid(-.01)); //invalid equivalence class
     }
 
 }
