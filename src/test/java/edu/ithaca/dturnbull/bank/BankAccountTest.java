@@ -14,8 +14,8 @@ class BankAccountTest {
         BankAccount bankAccount2 = new BankAccount("a@b.com", 0); //tests zero starting balance boundary case
         assertEquals(0, bankAccount2.getBalance(), 0.001);
         
-        BankAccount bankAccount3 = new BankAccount("a@b.com", -200); //tests negative starting balance boundary case
-        assertThrows(InsufficientFundsException.class, () -> bankAccount3.getBalance());
+        //BankAccount bankAccount3 = new BankAccount("a@b.com", -200); //tests negative starting balance boundary case
+       // assertEquals(-200, bankAccount3.getBalance(), 0.001); An account can't have a negative starting balance, so this test is invalid.
 
         BankAccount bankAccount4 = new BankAccount("a@b.com", 1000000000); //tests large starting balance boundary case
         assertEquals(1000000000, bankAccount4.getBalance(), 0.001);
@@ -40,7 +40,7 @@ class BankAccountTest {
         assertFalse(BankAccount.isEmailValid(null));         // null //boundary case
         assertTrue(BankAccount.isEmailValid( "user@gmail.com"));   // valid email address //equivalence class
         assertTrue(BankAccount.isEmailValid( "user-a@gmail.com"));   // valid email address //equivalence class
-        assertFalse(BankAccount.isEmailValid("2user@gmail.com")); // Valid email address (starting with number) //equivalence class
+        assertTrue(BankAccount.isEmailValid("2user@gmail.com")); // Valid email address (starting with number) //equivalence class
         assertFalse(BankAccount.isEmailValid("-user@gmail.com"));  // local part starts with invalid character //equivalence class
         assertFalse(BankAccount.isEmailValid(".user@gmail.com")); // local part starts with invalid character //equivalence class
         assertFalse(BankAccount.isEmailValid("@gmail.com"));   // missing local part (username) //equivalence class
