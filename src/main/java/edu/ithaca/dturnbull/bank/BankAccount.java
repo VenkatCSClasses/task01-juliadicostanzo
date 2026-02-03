@@ -63,4 +63,20 @@ public class BankAccount {
     public static boolean isAmountValid(double amount){
         return amount >= 0 && ((amount * 100) % 1 == 0); 
     }
+
+    /**
+     * @post increases the balance by amount if amount is valid
+     * if amount is invalid, throws IllegalArgumentException
+     */
+    public static void deposit(double amount){
+        
+    }
+    /**
+     * @post transfer amount from one account to another if amount is valid and from an account that has sufficient funds
+     * if amount is invalid, throws IllegalArgumentException
+     * if from account has insufficient funds, throws InsufficientFundsException
+     */
+    public static void transfer(BankAccount from, BankAccount to, double amount) throws InsufficientFundsException{
+        
+    }
 }
