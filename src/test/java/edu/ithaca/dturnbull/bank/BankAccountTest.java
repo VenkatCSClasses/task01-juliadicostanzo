@@ -29,8 +29,8 @@ class BankAccountTest {
 
         assertEquals(100, bankAccount.getBalance(), 0.01); //vaild equivalence class checks the balance is correct after withdraw 
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300)); // invalid equivalence class checks exception is thrown when amount is larger than balance
-        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(-300)); //invalid equivalence class checks exception is thrown when amount is negative 
-        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(-300.001));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-300)); //invalid equivalence class checks exception is thrown when amount is negative 
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-300.001));
         bankAccount.withdraw(100);
         assertEquals(0, bankAccount.getBalance(), 0.01); //checks the balance can be reduced to zero boundary case
 
@@ -70,6 +70,8 @@ class BankAccountTest {
 
         assertThrows(IllegalArgumentException.class,()-> new BankAccount("user@gmail.com", -100));
         assertThrows(IllegalArgumentException.class,()-> new BankAccount("user@gmail.com", 100.001));
+        assertThrows(IllegalArgumentException.class,()-> new BankAccount("user@gmail.com", 100.1231));
+        assertThrows(IllegalArgumentException.class,()-> new BankAccount("user@gmail.com", -100.1231));
     }
 
     @Test 
@@ -79,6 +81,6 @@ class BankAccountTest {
         assertTrue(BankAccount.isAmountValid(100.50)); //valid equivalence class
         assertFalse(BankAccount.isAmountValid(-100)); //invalid equivalence class
         assertFalse(BankAccount.isAmountValid(-.01)); //invalid equivalence class
+        assertFalse(BankAccount.isAmountValid(100.03401)); //invalid equivalence class
     }
-
 }
