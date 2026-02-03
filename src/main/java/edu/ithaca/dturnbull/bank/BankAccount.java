@@ -76,7 +76,7 @@ public class BankAccount {
      * if amount is invalid, throws IllegalArgumentException
      * if from account has insufficient funds, throws InsufficientFundsException
      */
-    public static void transfer(BankAccount from, BankAccount to, double amount) throws InsufficientFundsException{
+    public static void transfer(BankAccount from, BankAccount to, double amount) {
         
     }
 }

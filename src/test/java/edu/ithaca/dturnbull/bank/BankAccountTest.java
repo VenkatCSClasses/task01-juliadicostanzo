@@ -83,4 +83,36 @@ class BankAccountTest {
         assertFalse(BankAccount.isAmountValid(-.01)); //invalid equivalence class
         assertFalse(BankAccount.isAmountValid(100.03401)); //invalid equivalence class
     }
+
+    @Test
+    void depositTest() {
+        BankAccount bankAccount = new BankAccount("user@gmail.com",0);
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(0)); // boundary case 
+        assertEquals(0, bankAccount.getBalance(), 0.001);
+        bankAccount.deposit(100); //desposit to an account with zero balance
+        assertEquals(100, bankAccount.getBalance(), 0.001); //valid equivalence class
+        bankAccount.deposit(50.75); //deposit to an account with non-zero balance
+        assertEquals(150.75, bankAccount.getBalance(), 0.001); //valid equivalence class
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-10)); //invalid equivalence class
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(20.5234)); //invalid equivalence class
+    }
+
+    @Test
+    void transferTest() {
+        BankAccount bankAccount1 = new BankAccount("user1@gmail.com", 0);
+        BankAccount bankAccount2 = new BankAccount("user2@gmail.com",100);
+        assertThrows(IllegalArgumentException.class, () -> BankAccount.transfer(bankAccount1, bankAccount2, 0)); //boundary case
+        assertThrows(IllegalArgumentException.class, () -> BankAccount.transfer(bankAccount1, bankAccount2, 10)); //invalid equivalence class can't transfer from account with insufficient funds
+        BankAccount.transfer(bankAccount2, bankAccount1, 50); //valid equivalence class
+        assertEquals(bankAccount1.getBalance(),50, 0.001); 
+        assertEquals(bankAccount2.getBalance(),50, 0.001); 
+        
+        BankAccount.transfer(bankAccount2, bankAccount1, 49.99); //valid equivalence class
+        assertEquals(bankAccount1.getBalance(),99.99, 0.001); 
+        assertEquals(bankAccount2.getBalance(),0.01, 0.001);
+        assertThrows(InsufficientFundsException.class, () -> BankAccount.transfer(bankAccount2, bankAccount1, 49.99)); //invalid equivalence class
+        assertThrows(IllegalArgumentException.class, () -> BankAccount.transfer(bankAccount1, bankAccount2, -10)); //invalid equivalence class
+        assertThrows(IllegalArgumentException.class, () -> BankAccount.transfer(bankAccount1, bankAccount2, 10.28393)); //invalid equivalence class
+
+    }
 }
