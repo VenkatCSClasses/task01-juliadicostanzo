@@ -33,7 +33,8 @@ class BankAccountTest {
         assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-300.001));
         bankAccount.withdraw(100);
         assertEquals(0, bankAccount.getBalance(), 0.01); //checks the balance can be reduced to zero boundary case
-
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(100)); //invalid equivalence class, can't withdraw from an acctount with zero balance
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-300));
         assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.0001)); //invalid equivalence class checks exception is thrown when amount is more than balance
         assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.001));
     }
