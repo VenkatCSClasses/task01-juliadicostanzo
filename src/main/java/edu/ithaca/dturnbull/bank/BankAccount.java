@@ -38,7 +38,7 @@ public class BankAccount {
             throw new IllegalArgumentException("Cannot withdraw negative amount or amount with more than two decimal places");
         }
         else if (amount <= balance){
-            balance -= amount;
+            this.balance -= amount;
         }
         else {
             throw new InsufficientFundsException("Not enough money");
@@ -68,15 +68,34 @@ public class BankAccount {
      * @post increases the balance by amount if amount is valid
      * if amount is invalid, throws IllegalArgumentException
      */
-    public static void deposit(double amount){
-        
+    public void deposit(double amount){
+        if(isAmountValid(amount) && amount > 0){
+            this.balance += amount;
+        }else{
+            throw new IllegalArgumentException("Deposit amount is invalid");
+        }
     }
+
     /**
      * @post transfer amount from one account to another if amount is valid and from an account that has sufficient funds
      * if amount is invalid, throws IllegalArgumentException
      * if from account has insufficient funds, throws InsufficientFundsException
+     * if from and to accounts are the same, throws IllegalArgumentException
      */
-    public static void transfer(BankAccount from, BankAccount to, double amount) {
-        
+    public void transfer(BankAccount to, double amount) throws InsufficientFundsException {
+        if(!isAmountValid(amount) || amount <= 0){
+            throw new IllegalArgumentException("Transfer amount is invalid, must be positive and have two decimal points or less");
+        }
+        if(to == null){
+            throw new IllegalArgumentException("must have a valid account to transfer to");
+        }
+        if(this == to){
+            throw new IllegalArgumentException("Cannot transfer to the same account");
+        }
+        if (this.getBalance() < amount){
+            throw new InsufficientFundsException("Not enough money to transfer");
+        }
+        this.withdraw(amount);
+        to.deposit(amount);
     }
 }
