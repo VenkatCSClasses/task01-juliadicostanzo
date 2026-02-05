@@ -31,13 +31,12 @@ class BankAccountTest {
         assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(0)); // boundary case checks exception is thrown when amount is zero
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300)); // invalid equivalence class checks exception is thrown when amount is larger than balance
         assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-300)); //invalid equivalence class checks exception is thrown when amount is negative 
-        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-300.001));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-300.001)); //invalid equivalence class checks exception is thrown when amount is negative with decimal places
         bankAccount.withdraw(100);
         assertEquals(0, bankAccount.getBalance(), 0.01); //checks the balance can be reduced to zero boundary case
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(100)); //invalid equivalence class, can't withdraw from an acctount with zero balance
         assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-300));
-        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.0001)); //invalid equivalence class checks exception is thrown when amount is more than balance
-        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.001));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(100.0001)); //invalid equivalence class checks exception is thrown when amount is more than two decimal places
     }
 
     @Test
