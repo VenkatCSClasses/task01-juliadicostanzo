@@ -34,8 +34,8 @@ public class BankAccount {
      * if the amount is negative or larger than the balance, throws an InsufficientFundsException
      */
     public void withdraw (double amount) throws InsufficientFundsException{
-        if (isAmountValid(amount) == false){
-            throw new IllegalArgumentException("Cannot withdraw negative amount or amount with more than two decimal places");
+        if (isAmountValid(amount) == false || amount <= 0){
+            throw new IllegalArgumentException("Cannot withdraw amount less than zero or amount with more than two decimal places");
         }
         else if (amount <= balance){
             this.balance -= amount;

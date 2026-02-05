@@ -28,6 +28,7 @@ class BankAccountTest {
         bankAccount.withdraw(100);
 
         assertEquals(100, bankAccount.getBalance(), 0.01); //vaild equivalence class checks the balance is correct after withdraw 
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(0)); // boundary case checks exception is thrown when amount is zero
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300)); // invalid equivalence class checks exception is thrown when amount is larger than balance
         assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-300)); //invalid equivalence class checks exception is thrown when amount is negative 
         assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-300.001));
